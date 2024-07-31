@@ -66,13 +66,14 @@ def score_resume(vacancy, resume):
     return stream
 
 def scrollable_markdown(content, height=200):
+    content = content.replace('`', '\\`')
     markdown_html = f"""
     <div style="height: {height}px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0;">
         <div id="content"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
     <script>
-        document.getElementById('content').innerHTML = marked.parse(`{content.replace('`', '\\`')}`);
+        document.getElementById('content').innerHTML = marked.parse(`{content}`);
     </script>
     """
     st.components.v1.html(markdown_html, height=height+30)
