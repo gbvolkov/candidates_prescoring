@@ -1,0 +1,9 @@
+streamlit
+openai
+python-dotenv
+beautifulsoup4 
+markdown
+transformers
+torch
+scikit-learn
+numpy
