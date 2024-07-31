@@ -178,7 +178,7 @@ if 'job_description' not in st.session_state:
 if 'resume' not in st.session_state:
     st.session_state.resume = ""
 
-st.write("Let us start!", style="text-align: center; font-size: 20px; font-weight: bold;")
+st.write("Let us start!")
 job_description_url = st.text_area("Enter your vacancy url:", height=20, key="job_url", on_change=on_vacancy_url)
 resume_url = st.text_area("Enter your resume url:", height=20, key="cv_url", on_change=on_resume_url)
 st.write('Job descripption:')
