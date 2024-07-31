@@ -23,10 +23,14 @@ def load_prompts(file_path='prompt.json'):
     return prompts['system_prompt'], Template(prompts['user_prompt_template'])
 
 SYSTEM_PROMPT, USER_PROMPT_TEMPLATE = load_prompts()
+if st.secrets["OPENAI_API_KEY"]:
+    OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+else:
+    OPENAI_API_KEY = Config.OPENAI_API_KEY
 
 client = OpenAI(
     # Replace with your OpenAI API key or use environment variable
-    api_key=Config.OPENAI_API_KEY
+    api_key=OPENAI_API_KEY#Config.OPENAI_API_KEY
 )
 
 def on_vacancy_url():
@@ -69,7 +73,7 @@ def scrollable_markdown(content, height=200):
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
     <script>
-        document.getElementById('content').innerHTML = marked.parse(`{content.replace('`', '\\`')}`);
+        document.getElementById('content').innerHTML = marked.parse("{content.replace('"', '\\"')}");
     </script>
     """
     st.components.v1.html(markdown_html, height=height+30)
