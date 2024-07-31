@@ -73,10 +73,11 @@ def scrollable_markdown(content, height=200):
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
     <script>
-        document.getElementById('content').innerHTML = marked.parse("{content.replace('"', '\\"')}");
+        document.getElementById('content').innerHTML = marked.parse(`{content.replace('`', '\\`')}`);
     </script>
     """
     st.components.v1.html(markdown_html, height=height+30)
+
 
 def html_escape(text):
     return html.escape(text).replace('\n', '&#10;')
@@ -181,7 +182,7 @@ if 'resume' not in st.session_state:
 st.write("Let us start!")
 job_description_url = st.text_area("Enter your vacancy url:", height=20, key="job_url", on_change=on_vacancy_url)
 resume_url = st.text_area("Enter your resume url:", height=20, key="cv_url", on_change=on_resume_url)
-st.write('Job descripption:')
+st.write('Job description:')
 scrollable_markdown(st.session_state.job_description)
 st.write('Resume:')
 scrollable_markdown(st.session_state.resume)
